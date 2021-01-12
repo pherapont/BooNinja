@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test Suite</title>
+        <script>
+            function assert(value, desc) {
+                const li = document.createElement("li");
+                li.className = value ? "pass" : "fail";
+                li.appendChild(document.createTextNode(desc));
+                document.getElementById("results").appendChild(li);
+            }
+
+            function report(text) {
+                assert(true, text);
+            }
+
+            const text = "Domo arigato!";
+
+            window.onload = function() {
+                report("Before defining functons");
+
+                function useless (ninjaCallback) {
+                    report("In useless function");
+                    return ninjaCallback();
+                }
+
+                function getText() {
+                    report("In getText function");
+                    return text;
+                }
+
+                report("Before making all the calls");
+
+                assert(useless(getText) === text,
+                    "The useless function works! " + text);
+
+                report("After the calls have been made");
+            };
+        </script>
+        <style>
+            #results li.pass { color: green; }
+            #results li.fail { color: red; }
+        </style>
+    </head>
+    <body>
+        <ul id="results"></ul>
+    </body>
+</html>
